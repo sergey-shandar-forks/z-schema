@@ -7971,8 +7971,9 @@ Report.prototype.addCustomError = function (errorCode, errorMessage, params, sub
         schemaId: this.getSchemaId()
     };
 
-    err[Utils.schemaSymbol] = schema;
-    err[Utils.jsonSymbol] = this.getJson();
+    const json = this.getJson();
+    err[Utils.schemaSymbol] = () => schema;
+    err[Utils.jsonSymbol] = () => json;
 
     if (schema && typeof schema === "string") {
         err.description = schema;
